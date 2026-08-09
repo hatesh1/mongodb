@@ -1,3 +1,6 @@
+import dns from 'node:dns';
+dns.setDefaultResultOrder('ipv4first');
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 import mongoose from 'mongoose'
 
@@ -11,7 +14,7 @@ export const connectDatabase = async () => {
 
     try {
         await mongoose.connect(uri, {
-            dbName: 'mongo'
+            dbName: 'my-mongodb'
         })
         console.log('mongoose is connected successfully!')
     } catch (error) {
