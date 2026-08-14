@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
-import { postRoutes } from "./routes/index.mjs"
+import { authRoutes, postRoutes } from "./routes/index.mjs"
 import cors from 'cors'
 import { connectDatabase } from './libs/mongodb.mjs'
 
@@ -166,6 +166,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1', postRoutes)
+app.use('/api/v1', authRoutes)
 
 app.listen(PORT, () => {
     console.log('server is running on http://localhost:${PORT}')
