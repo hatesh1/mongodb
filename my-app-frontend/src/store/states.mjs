@@ -5,14 +5,14 @@ export const store = create((set) => ({
     isLogin: null,
 
     // Accept payload as a parameter
-    global_login: (userData) => {
+    globalLogin: (userData) => {
         set({
             user: userData,
             isLogin: true,
         })
     },
 
-    global_logout: () => {
+    globalLogout: () => {
         set({
             user: null,
             isLogin: false,
