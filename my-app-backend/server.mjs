@@ -1,15 +1,16 @@
 import 'dotenv/config'
 import express from 'express'
-import { authRoutes, postRoutes } from "./routes/index.mjs"
+import { authRoutes, postRoutes, profileRoutes } from "./routes/index.mjs"
 import cors from 'cors'
 import { connectDatabase } from './libs/mongodb.mjs'
+import { authGuardJWT } from './middlewares/jwt/index.mjs'
 
 const app = express()
 
 app.use(express.json())
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'frontentd deploy url'],
     methods: '*'
 }))
 
@@ -165,8 +166,10 @@ app.get('/', (req, res) => {
     `)
 })
 
-app.use('/api/v1', postRoutes)
 app.use('/api/v1', authRoutes)
+app.use('/api/v1', authGuardJWT)
+app.use('/api/v1', postRoutes)
+app.use('/api/v1', profileRoutes)
 
 app.listen(PORT, () => {
     console.log('server is running on http://localhost:${PORT}')

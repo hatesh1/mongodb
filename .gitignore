@@ -1,2 +1,8 @@
 node_modules
 .env
+my-app-backend/node_modules
+my-app-frontend/node_modules
+my-app-backend/.env
+my-app-frontend/.env
+dist/
+build/
