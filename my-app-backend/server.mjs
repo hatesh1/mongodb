@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'frontentd deploy url'],
+    origin: ['http://localhost:5173', 'https://mongodb-frontend-chi.vercel.app'],
     methods: '*'
 }))
 
