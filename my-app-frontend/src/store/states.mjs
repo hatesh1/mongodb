@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 export const store = create((set) => ({
     user: null,
-    isLogin: null,
+    isLogin: false,
 
     // Accept payload as a parameter
     globalLogin: (userData) => {

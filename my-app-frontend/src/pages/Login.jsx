@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { baseUrl } from '../core'
 import axios from 'axios'
 
 const Login = () => {
-  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -16,7 +16,7 @@ const Login = () => {
     setErrorMessage('')
 
     // validations
-    if (!email.trim() || !password) {
+    if (!email || !password) {
       setErrorMessage('Email and password are required!')
       return
     }
@@ -27,17 +27,14 @@ const Login = () => {
     }
 
     try {
-      // api call
+      // call api
       const resp = await axios.post(`${baseUrl}/api/v1/login`, {
-        email: email.trim(),
+        email: email,
         password: password,
       })
 
       alert('login successful!')
-      
-      const token = resp.data?.token || resp.data?.data
-      localStorage.setItem('token', token)
-      navigate('/Post')
+      localStorage.setItem('token', resp.data.data)
 
     } catch (error) {
       console.error(error)
