@@ -3,7 +3,7 @@ import axios from 'axios'
 import { baseUrl } from '../core.mjs'
 import './style.css'
 
-const Form = ({getAllPosts}) => {
+const Form = ({ getAllPosts }) => {
     const titleRef = useRef(null)
     const descRef = useRef(null)
 
@@ -24,6 +24,10 @@ const Form = ({getAllPosts}) => {
             const resp = await axios.post(`${baseUrl}/api/v1/post`, {
                 title: titleRef.current.value,
                 description: descRef.current.value
+            }, {
+                headers: {
+                    token: localStorage.getItem('token')
+                }
             })
             alert('post created successfully!')
             getAllPosts()
