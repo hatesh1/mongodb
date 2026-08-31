@@ -6,9 +6,10 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import NotFound from './pages/NotFound'
 import axios from 'axios'
-import { baseUrl } from './core'
-import { store } from './store/states'
+import { baseUrl } from './core.mjs'
+import { store } from './store/states.mjs'
 import SplashScreen from './pages/SplashScreen'
+import Profile from './pages/Profile'
 
 const App = () => {
   const { globalLogin, globalLogout, user, isLogin } = store()
@@ -18,6 +19,14 @@ const App = () => {
   }, [])
 
   const getProfile = async () => {
+    const token = localStorage.getItem('token')
+
+    // if no token then logout
+    if (!token) {
+      globalLogout()
+      return
+    }
+
     try {
       const resp = await axios.get(`${baseUrl}/api/v1/profile`, {
         headers: {
@@ -28,6 +37,7 @@ const App = () => {
 
     } catch (error) {
       console.error(error)
+      localStorage.removeItem('token')
       globalLogout()
     }
   }
@@ -40,6 +50,7 @@ const App = () => {
         isLogin == true ?
           <Routes>
             <Route path='/' element={<Posts />} />
+            <Route path='/profile' element={<Profile />} />
             <Route path='*' element={<Navigate to='/' />} />
           </Routes> :
           null

@@ -113,3 +113,12 @@ textarea.form-input {
 .form-btn:active {
   background-color: #065f46;
 }
+
+.header-container {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

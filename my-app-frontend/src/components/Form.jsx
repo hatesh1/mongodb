@@ -25,7 +25,7 @@ const Form = ({getAllPosts}) => {
                 title: titleRef.current.value,
                 description: descRef.current.value
             })
-            alert('post created')
+            alert('post created successfully!')
             getAllPosts()
             event.target.reset()
 

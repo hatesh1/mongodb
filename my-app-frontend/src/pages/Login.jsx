@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { baseUrl } from '../core'
 import axios from 'axios'
+import { store } from '../store/states.mjs'
 
 const Login = () => {
+
+  const { globalLogin } = store()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -34,7 +39,9 @@ const Login = () => {
       })
 
       alert('login successful!')
-      localStorage.setItem('token', resp.data.data)
+      localStorage.setItem('token', resp.data.data.token)
+      globalLogin(resp.data.data.token)
+      navigate('/')
 
     } catch (error) {
       console.error(error)

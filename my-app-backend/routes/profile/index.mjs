@@ -78,7 +78,7 @@ router.put('/password', async (req, res, next) => {
         })
 
         return res.send({
-            message: 'password updated',
+            message: 'password updated successfully!',
         })
 
     } catch (error) {
@@ -89,7 +89,21 @@ router.put('/password', async (req, res, next) => {
     }
 })
 
-// update pf picture
-// update email
+router.put('/profile-picture', async (req, res, next) => {
+    try {
+        return res.send({
+            message: 'profile picture updated successfully!',
+        })
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({
+            message: 'internal server error'
+        })
+    }
+})
+
+
+// edit email
 
 export default router

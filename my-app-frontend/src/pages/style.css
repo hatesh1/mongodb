@@ -151,9 +151,55 @@ body {
   font-size: 1rem;
 }
 
-.loading{
-    font-weight: bold;
-    text-align: center;
-    margin: 2em;
-    font-size: 2em;
+.loading {
+  font-weight: bold;
+  text-align: center;
+  margin: 2em;
+  font-size: 2em;
+}
+
+.profile-container {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 128px;
+}
+
+.section-title {
+  font-size: 1.875rem;
+  /* 30px */
+  font-weight: 700;
+  margin: 0;
+}
+
+.security-title {
+  margin-top: 32px;
+}
+
+.profile-image {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+.user-name {
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.edit-icon {
+  cursor: pointer;
+}
+
+.security-subtitle {
+  margin: 0;
+  color: #555;
 }

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Form from '../components/Form'
 import axios from 'axios'
 import moment from 'moment'
-import { baseUrl } from '../core'
+import { baseUrl } from '../core.mjs'
 import './style.css'
+import Header from '../components/Header'
 
 const Posts = () => {
     const [posts, setPosts] = useState([])
@@ -14,7 +15,11 @@ const Posts = () => {
 
     const getAllPosts = async () => {
         try {
-            const resp = await axios.get(`${baseUrl}/api/v1/post`)
+            const resp = await axios.get(`${baseUrl}/api/v1/post`, {
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
             setPosts(resp.data.data)
         } catch (error) {
             console.error(error)
@@ -27,8 +32,12 @@ const Posts = () => {
             return
         }
         try {
-            await axios.delete(`${baseUrl}/api/v1/post/${postId}`)
-            alert('post deleted')
+            const resp = await axios.delete(`${baseUrl}/api/v1/post/${postId}`, {
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            alert('post deleted successful!')
             getAllPosts()
         } catch (error) {
             console.error(error)
@@ -47,11 +56,17 @@ const Posts = () => {
         if (!updatedTitle || !updatedDesc) return
 
         try {
-            await axios.put(`${baseUrl}/api/v1/post/${postId}`, {
+            const resp = await axios.put(`${baseUrl}/api/v1/post/${postId}`, {
                 title: updatedTitle,
                 description: updatedDesc
-            })
-            alert('post updated')
+            },
+                {
+                    headers: {
+                        token: localStorage.getItem('token')
+                    }
+                }
+            )
+            alert('post updated sucessfull!')
             getAllPosts()
         } catch (error) {
             console.error(error)
@@ -60,6 +75,7 @@ const Posts = () => {
 
     return (
         <div className='posts-page-container'>
+            <Header />
             <Form getAllPosts={getAllPosts} />
 
             <div className='posts-list-container'>
